@@ -19,5 +19,6 @@ static void __exit hello_exit(void){
     printk("BYE KERNEL");
 }
 
+//SPECIFYING WHICH FUNCTIONS TO BE USED TO INITTIALIZE OR EXIT
 module_init(hello_init);
 module_exit(hello_exit);
