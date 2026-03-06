@@ -1,0 +1,1 @@
+savedcmd_/home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/main.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/main.ko /home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/main.o /home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/main.mod.o

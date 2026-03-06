@@ -1,0 +1,1 @@
+savedcmd_/home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/Module.symvers -T /home/keamogetse/Downloads/LINUX_DRIVER_IN_C_LANGUAGE/src/modules.order -i Module.symvers -e 
