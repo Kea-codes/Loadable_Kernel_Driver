@@ -1,43 +1,47 @@
-# GPIO LED Controller Kernel Module
+# Hello World Linux Kernel Module
 
-A simple Linux kernel module that demonstrates basic GPIO control on embedded Linux systems (e.g., Raspberry Pi).  
-It configures one GPIO pin as an **output** (LED) and another as an **input** (button), turns the LED on at module load, and prints the button state.
+A minimal "Hello World" loadable kernel module (LKM) for learning Linux kernel programming.  
+When loaded, it prints **"HELLO KERNEL BUDDY"** to the kernel log.  
+When unloaded, it prints **"BYE KERNEL"**.
+
+Perfect first project to understand kernel module basics: init/exit functions, `printk`, module metadata, and the build/load process.
 
 ## Features
-- Turns LED **ON** automatically when the module is loaded
-- Turns LED **OFF** when the module is removed
-- Reads and prints the current state of the button ("pressed" or "not pressed")
-- Uses modern **gpiod** (GPIO descriptor) API instead of legacy integer-based GPIO
+- Simple initialization and cleanup functions
+- Uses modern kernel module macros (`MODULE_LICENSE`, `MODULE_AUTHOR`, etc.)
+- No hardware or complex logic — pure hello world
 
-## Hardware Requirements
-- Single-board computer with GPIO support (e.g., Raspberry Pi, Orange Pi, etc.)
-- LED connected to GPIO **21** (with appropriate current-limiting resistor)
-- Push button connected to GPIO **20** (with pull-up or pull-down resistor as required)
+## Requirements
+- Linux system (tested on Raspberry Pi, Ubuntu, Debian-based distros, etc.)
+- Kernel headers installed matching your running kernel:
+  ```bash
+  sudo apt update
+  sudo apt install linux-headers-$(uname -r)     # Debian/Ubuntu/Raspberry Pi OS
 
-**GPIO pin mapping used in this driver:**
-| Pin | GPIO | Direction | Purpose   |
-|-----|------|-----------|-----------|
-| 21  | 21   | Output    | LED       |
-| 20  | 20   | Input     | Button    |
+## Project Files
+├── main.c       # The kernel module source code
 
-## Software Requirements
-- Linux kernel with GPIO support
-- Kernel headers installed (`linux-headers-$(uname -r)`)
-- `gcc`, `make`, and root privileges
-
-## Files in this project
-├── main.c       # Kernel module source code
-
-├── Makefile     # Build and installation instructions
+├── Makefile     # Build, clean, install, and log helpers
 
 └── README.md    # This file
 
+## Usage
 
-## Building the Module
+1. Load the module → see "HELLO KERNEL BUDDY" in logs
+sudo make install
+ or manually: sudo insmod main.ko
 
-```bash
-# 1. Make sure you're in the project directory
-make
+ 2. Check kernel messages (last 20 lines)
+sudo make log
+ or: dmesg | tail -20
+ or: sudo journalctl -k --since "5 minutes ago"   (on systemd systems)
 
-# 2. (Optional) Clean previous build artifacts
-make clean
+ Expected output when loading:
+ [12345.678901] HELLO KERNEL BUDDY
+
+ 3. Unload the module → see "BYE KERNEL"
+sudo make uninstall
+ or manually: sudo rmmod main
+
+ Quick log check again
+sudo make log
